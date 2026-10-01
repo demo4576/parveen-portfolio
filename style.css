@@ -3,7 +3,7 @@
     /* Paper Theme Colors */
     --bg-paper: #f7f5f0;
     --text-dark: #2c2c2c;
-    --accent-paper: #8c7a6b;
+    --accent-paper: #2b595a;
 
     /* Terminal Theme Colors */
     --bg-terminal: #1a1b26;
@@ -35,6 +35,98 @@ body {
     padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+}
+
+/* --- Hamburger Menu Button --- */
+.menu-toggle {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(140, 122, 107, 0.3);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+}
+
+.menu-toggle:hover {
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: scale(1.05);
+}
+
+/* --- Floating Menu --- */
+.floating-menu {
+    position: fixed;
+    top: 5.5rem; /* Positions it nicely below the hamburger button */
+    right: 2rem;
+    width: 320px;
+    min-height: 33vh;
+    background-color: rgba(247, 245, 240, 0.95); /* Paper theme background */
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.02) 100%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+    border: 1px solid rgba(140, 122, 107, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.25rem 0;
+    
+    /* Animation initial state */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-15px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.floating-menu.is-active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+}
+
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 0.75rem;
+    width: 100%;
+    margin-left: 2rem;
+}
+
+.menu-link {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.menu-link:hover {
+    color: #c5533b;
+    transform: translateY(-2px);
+}
+
+/* Mobile Adjustment for the Floating Menu */
+@media (max-width: 600px) {
+    .floating-menu {
+        top: 6rem;
+        right: 1rem;
+        left: 1rem;
+        width: auto; /* Takes up most of the mobile screen width */
+    }
 }
 
 /* --- Global Links (Paper Theme Defaults) --- */
@@ -525,4 +617,226 @@ details[open] summary::after {
         height: 2px;
         margin: 0 1rem;
     }
+}
+
+/* --- About Page: Editorial Layout --- */
+.about-hero {
+    margin-bottom: 2rem;
+    padding-top: 6rem;
+}
+
+.about-hero .name {
+    font-size: 3.5rem; /* Slightly smaller than index for readability */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.editorial-content {
+    max-width: 720px; /* Optimal reading width so lines aren't too long */
+    margin: 0 auto 6rem auto;
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--text-dark);
+    line-height: 1.8;
+}
+
+.editorial-content h3 {
+    font-family: var(--font-sans);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-paper);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(140, 122, 107, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+.editorial-content p {
+    margin-bottom: 1.5rem;
+}
+
+/* Stylish Drop Cap for the first letter */
+.drop-cap::first-letter {
+    float: left;
+    font-size: 4.5rem;
+    line-height: 0.8;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    font-family: var(--font-serif);
+    color: var(--accent-paper); /* Or use #c5533b if you chose Editorial Rust */
+}
+
+/* Standout Pull-Quote */
+.pull-quote {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--text-dark);
+    margin: 3rem 0;
+    padding: 2rem;
+    border-left: 4px solid #c5533b; /* Editorial Rust border */
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 0 8px 8px 0;
+    line-height: 1.6;
+}
+
+.about-cta {
+    margin-top: 4rem;
+    text-align: center;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .about-hero .name {
+        font-size: 2.5rem;
+    }
+    .pull-quote {
+        font-size: 1.25rem;
+        padding: 1.5rem;
+    }
+}
+
+/* --- CV Page Shared Layout --- */
+.cv-section {
+    max-width: 800px;
+    margin: 0 auto 5rem auto;
+}
+
+/* --- Vertical Experience Timeline --- */
+.vertical-timeline {
+    position: relative;
+    padding-left: 2.5rem;
+    margin-top: 2rem;
+}
+
+/* The vertical line running down the left side */
+.vertical-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 6px;
+    height: 100%;
+    width: 2px;
+    background-color: rgba(140, 122, 107, 0.3);
+}
+
+.timeline-event {
+    position: relative;
+    margin-bottom: 3.5rem;
+}
+
+.timeline-event:last-child {
+    margin-bottom: 0;
+}
+
+/* The dot on the timeline */
+.timeline-event::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 0.25rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--bg-paper);
+    border: 2px solid var(--accent-paper); /* Uses the accent color you set earlier */
+    box-shadow: 0 0 0 4px var(--bg-paper); /* Creates a cutout effect over the line */
+}
+
+.event-date {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-paper);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.event-content h4 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--text-dark);
+    margin-bottom: 0.2rem;
+}
+
+.event-org {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #4a4a4a;
+    margin-bottom: 1rem;
+}
+
+.event-content p {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* --- Contact Page Additions --- */
+.contact-split {
+    margin-bottom: 5rem;
+}
+
+.contact-terminal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    height: 100%;
+    min-height: 250px;
+}
+
+.terminal-line {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.terminal-line .prompt {
+    color: var(--terminal-green);
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.terminal-line .output {
+    color: var(--text-terminal);
+    font-size: 1.1rem;
+    padding-left: 1rem; /* Indents the answer from the prompt */
+}
+
+.terminal-line .output.highlight {
+    color: #ffbd2e; /* Yellow warning/highlight color from the terminal palette */
+}
+
+/* Make sure the email link in the terminal looks correct */
+.contact-terminal .text-link {
+    font-size: 1.1rem;
+    padding-left: 1rem;
+    width: fit-content;
+}
+
+/* --- Digital Footprint Section --- */
+.digital-footprint {
+    max-width: 800px;
+    margin: 0 auto 5rem auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.large-socials {
+    gap: 1rem;
+}
+
+.large-socials .social-chip {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
 }
